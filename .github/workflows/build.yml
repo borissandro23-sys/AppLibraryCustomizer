@@ -28,10 +28,17 @@ jobs:
             clang \
             git \
             libplist-dev \
-            ldid \
             make \
             perl \
             python3
+
+      - name: Install ldid
+        run: |
+          sudo curl -fL \
+            https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_linux_x86_64 \
+            -o /usr/local/bin/ldid
+          sudo chmod 755 /usr/local/bin/ldid
+          ldid -h >/dev/null
 
       - name: Install Theos
         run: |
