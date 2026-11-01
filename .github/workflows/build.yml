@@ -65,10 +65,10 @@ jobs:
       - name: Install iOS SDK
         run: |
           git clone --depth 1 https://github.com/theos/sdks.git "$RUNNER_TEMP/theos-sdks"
-          SDK_PATH="$(find "$RUNNER_TEMP/theos-sdks" -maxdepth 1 -type d -name 'iPhoneOS*.sdk' | sort -V | tail -n 1)"
+          SDK_PATH="$RUNNER_TEMP/theos-sdks/iPhoneOS14.5.sdk"
 
-          if [ -z "$SDK_PATH" ]; then
-            echo "No iPhoneOS SDK was found in theos/sdks."
+          if [ ! -d "$SDK_PATH" ]; then
+            echo "Required iPhoneOS14.5.sdk was not found in theos/sdks."
             exit 1
           fi
 
