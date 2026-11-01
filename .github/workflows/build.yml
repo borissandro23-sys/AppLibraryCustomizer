@@ -30,7 +30,8 @@ jobs:
             libplist-dev \
             make \
             perl \
-            python3
+            python3 \
+            xz-utils
 
       - name: Install ldid
         run: |
@@ -44,6 +45,21 @@ jobs:
         run: |
           git clone --recursive https://github.com/theos/theos.git "$HOME/theos"
           echo "THEOS=$HOME/theos" >> "$GITHUB_ENV"
+
+      - name: Install iOS toolchain
+        run: |
+          curl -fL \
+            https://github.com/sbingner/llvm-project/releases/download/v10.0.0-2/linux-ios-arm64e-clang-toolchain.tar.lzma \
+            -o "$RUNNER_TEMP/ios-toolchain.tar.lzma"
+
+          TMP_DIR="$(mktemp -d)"
+          tar --lzma -xf "$RUNNER_TEMP/ios-toolchain.tar.lzma" -C "$TMP_DIR"
+
+          mkdir -p "$THEOS/toolchain/linux/iphone"
+          cp -R "$TMP_DIR"/ios-arm64e-clang-toolchain/. "$THEOS/toolchain/linux/iphone/"
+
+          "$THEOS/toolchain/linux/iphone/bin/clang" --version
+          rm -rf "$TMP_DIR" "$RUNNER_TEMP/ios-toolchain.tar.lzma"
 
       - name: Install iOS SDK
         run: |
