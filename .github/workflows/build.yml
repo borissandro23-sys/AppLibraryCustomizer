@@ -28,6 +28,7 @@ jobs:
             clang \
             git \
             libplist-dev \
+            libtinfo5 \
             make \
             perl \
             python3 \
