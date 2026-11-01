@@ -74,6 +74,10 @@ jobs:
 
           cp -R "$SDK_PATH" "$THEOS/sdks/"
 
+          # Use the libc++ headers shipped with the Linux iOS toolchain.
+          # The SDK copy duplicates module.modulemap and causes Clang module redefinitions.
+          rm -rf "$THEOS/sdks/$(basename "$SDK_PATH")/usr/include/c++"
+
       - name: Build package
         run: |
           make clean
