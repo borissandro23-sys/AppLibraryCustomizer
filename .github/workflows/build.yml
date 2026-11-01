@@ -1,0 +1,64 @@
+name: Build AppLibraryCustomizer
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build rootless Debian package
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            clang \
+            git \
+            libplist-dev \
+            ldid \
+            make \
+            perl \
+            python3
+
+      - name: Install Theos
+        run: |
+          git clone --recursive https://github.com/theos/theos.git "$HOME/theos"
+          echo "THEOS=$HOME/theos" >> "$GITHUB_ENV"
+
+      - name: Install iOS SDK
+        run: |
+          git clone --depth 1 https://github.com/theos/sdks.git "$RUNNER_TEMP/theos-sdks"
+          SDK_PATH="$(find "$RUNNER_TEMP/theos-sdks" -maxdepth 1 -type d -name 'iPhoneOS*.sdk' | sort -V | tail -n 1)"
+
+          if [ -z "$SDK_PATH" ]; then
+            echo "No iPhoneOS SDK was found in theos/sdks."
+            exit 1
+          fi
+
+          cp -R "$SDK_PATH" "$THEOS/sdks/"
+
+      - name: Build package
+        run: |
+          make clean
+          make package FINALPACKAGE=1
+
+      - name: Upload Debian package
+        uses: actions/upload-artifact@v4
+        with:
+          name: AppLibraryCustomizer-deb
+          path: packages/*.deb
+          if-no-files-found: error
+          retention-days: 14
