@@ -1,0 +1,9 @@
+Package: com.borissandro23.applibrarycustomizer
+Name: App Library Customizer
+Version: 0.1.0
+Architecture: iphoneos-arm64
+Description: Experimental App Library organization tweak scaffold.
+Maintainer: borissandro23-sys
+Author: borissandro23-sys
+Section: Tweaks
+Depends: firmware (>= 15.0), ellekit
