@@ -11,7 +11,7 @@ include $(THEOS)/makefiles/common.mk
 TWEAK_NAME = AppLibraryCustomizer
 
 AppLibraryCustomizer_FILES = Tweak.xm
-AppLibraryCustomizer_CFLAGS = -fobjc-arc
+AppLibraryCustomizer_CFLAGS = -fobjc-arc -fno-modules
 AppLibraryCustomizer_FRAMEWORKS = Foundation UIKit
 
 include $(THEOS_MAKE_PATH)/tweak.mk
