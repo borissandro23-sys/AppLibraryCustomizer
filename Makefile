@@ -15,3 +15,14 @@ AppLibraryCustomizer_CFLAGS = -fobjc-arc -fno-modules
 AppLibraryCustomizer_FRAMEWORKS = Foundation UIKit
 
 include $(THEOS_MAKE_PATH)/tweak.mk
+
+BUNDLE_NAME = AppLibraryCustomizerPrefs
+
+AppLibraryCustomizerPrefs_FILES = ALCRootListController.m
+AppLibraryCustomizerPrefs_CFLAGS = -fobjc-arc
+AppLibraryCustomizerPrefs_FRAMEWORKS = UIKit
+AppLibraryCustomizerPrefs_PRIVATE_FRAMEWORKS = Preferences
+AppLibraryCustomizerPrefs_INSTALL_PATH = /Library/PreferenceBundles
+AppLibraryCustomizerPrefs_PLIST = Info.plist
+
+include $(THEOS_MAKE_PATH)/bundle.mk
