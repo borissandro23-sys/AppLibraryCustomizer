@@ -11,8 +11,8 @@ Experimental jailbreak tweak for iPhone 6s running iOS 15.8.8 with Dopamine.
 
 ## Current status
 
-**Scaffold only.** Version 0.1.0 currently contains a SpringBoard load diagnostic.
-It does not yet modify App Library categories or move applications.
+**Diagnostic discovery build.** The tweak logs its SpringBoard load and lists runtime class names containing
+`Library` or `Category`. It does not hook, modify, rename, or move App Library items yet.
 
 ## Build environment
 
@@ -35,4 +35,5 @@ been verified and a recovery path is available.
 
 App Library grouping is managed by private SpringBoard frameworks. The implementation
 must be researched against the target iOS version; private class and method names must
-not be assumed from other iOS releases.
+not be assumed from other iOS releases. This diagnostic build only enumerates runtime
+class names and does not invoke private App Library methods.
