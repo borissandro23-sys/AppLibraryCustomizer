@@ -22,13 +22,15 @@ enum {
     PSGroupCell = 0
 };
 
-@interface ALCRootListController : PSListController
+@interface ALCRootListController : PSListController {
+    NSArray *_alcSpecifiers;
+}
 @end
 
 @implementation ALCRootListController
 
 - (NSArray *)specifiers {
-    if (!_specifiers) {
+    if (!_alcSpecifiers) {
         PSSpecifier *statusGroup =
             [PSSpecifier preferenceSpecifierNamed:@"Текущий статус"
                                             target:self
@@ -40,15 +42,15 @@ enum {
 
         [statusGroup setProperty:
             @"App Library Customizer 0.3.0 — диагностическая сборка. "
-             "Твик проверяет классы SpringBoard, связанные с App Library. "
-             "Создание категорий, переименование и перемещение приложений "
-             "пока не реализованы."
+             @"Твик проверяет классы SpringBoard, связанные с App Library. "
+             @"Создание категорий, переименование и перемещение приложений "
+             @"пока не реализованы."
                      forKey:@"footerText"];
 
-        _specifiers = @[statusGroup];
+        _alcSpecifiers = @[statusGroup];
     }
 
-    return _specifiers;
+    return _alcSpecifiers;
 }
 
 @end
