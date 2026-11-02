@@ -1,0 +1,8 @@
+{
+    entry = {
+        bundle = AppLibraryCustomizerPrefs;
+        cell = PSLinkCell;
+        detail = ALCRootListController;
+        label = "App Library Customizer";
+    };
+}
