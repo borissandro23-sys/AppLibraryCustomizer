@@ -11,8 +11,9 @@ Experimental jailbreak tweak for iPhone 6s running iOS 15.8.8 with Dopamine.
 
 ## Current status
 
-**Diagnostic discovery build.** The tweak logs its SpringBoard load and lists runtime class names containing
-`Library` or `Category`. It does not hook, modify, rename, or move App Library items yet.
+**Diagnostic discovery build with a preferences page.** The tweak logs its SpringBoard load and lists runtime class names containing `Library` or `Category`. The Settings page reports the current diagnostic status only.
+
+It does not hook, modify, rename, or move App Library items yet. No functional category controls are exposed.
 
 ## Build environment
 
